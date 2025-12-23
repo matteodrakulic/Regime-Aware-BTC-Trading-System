@@ -1,0 +1,26 @@
+# Core numerical & data handling
+numpy
+pandas
+scipy
+
+# Machine learning
+scikit-learn
+hmmlearn
+
+# Statistics & time-series
+statsmodels
+
+# Visualization
+matplotlib
+seaborn
+
+# Utilities
+pyyaml
+tqdm
+
+# Development & testing
+pytest
+jupyter
+
+# data
+ccxt
