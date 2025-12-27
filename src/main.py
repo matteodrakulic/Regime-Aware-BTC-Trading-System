@@ -100,11 +100,11 @@ def run_backtest(args):
         df['close'], 
         target_annual_vol=args.target_vol, 
         window_days=20,
-        max_leverage=1.0
+        max_leverage=3.0
     )
     
     logger.info("Applying Risk Limits...")
-    risk_limits = RiskLimits(max_leverage=1.0, max_position_size=1.0)
+    risk_limits = RiskLimits(max_leverage=3.0, max_position_size=3.0)
     sig_final = risk_limits.apply_limits(sig_vol)
     
     logger.info(f"Running Backtest (Capital=${args.capital})...")
