@@ -40,8 +40,8 @@ We deploy an optimized **Robust Trend Strategy** exclusively during **Regime 2**
 Instead of fixed position sizing, we use Volatility Targeting to normalize risk.
 *   **Target Volatility:** 60% Annualized.
 *   **Formula:** `Position Size = Target Vol / Current Vol`.
-*   **Max Leverage:** Capped at **3.0x**.
-    *   *Example:* If current market volatility is low (20%), the system may leverage up to 3x to achieve the 60% target. If volatility is extreme (120%), it cuts position size to 0.5x.
+*   **Max Leverage:** Capped at **1.0x** (No Leverage).
+    *   *Example:* If current market volatility is low (20%), the system caps exposure at 1.0x (it does not lever up). If volatility is extreme (120%), it cuts position size to 0.5x to maintain target risk.
 
 ### Yield Generation
 When the system is **FLAT** (Regimes 0 & 1) or holding partial cash, the idle capital is assumed to earn a risk-free rate.
