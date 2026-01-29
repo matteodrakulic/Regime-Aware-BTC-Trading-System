@@ -29,10 +29,15 @@ def compute_performance_metrics(returns: pd.Series, equity: pd.Series, initial_c
     # Sharpe Ratio
     sharpe = mean_ret / vol if vol > 0 else 0
     
-    # Sortino Ratio (Downside Deviation only)
-    downside_returns = returns[returns < 0]
-    downside_vol = downside_returns.std() * np.sqrt(candles_per_year)
-    sortino = mean_ret / downside_vol if downside_vol > 0 else 0
+    # Sortino Ratio (Downside Deviation from 0)
+    # We use 0 as the target return (MAR = 0)
+    # Downside deviation is the square root of the mean of squared negative returns
+    downside_returns = returns.copy()
+    downside_returns[downside_returns > 0] = 0
+    downside_variance = (downside_returns ** 2).mean()
+    downside_dev = np.sqrt(downside_variance) * np.sqrt(candles_per_year)
+    
+    sortino = mean_ret / downside_dev if downside_dev > 0 else 0
     
     # Max Drawdown
     rolling_max = equity.cummax()

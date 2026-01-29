@@ -30,6 +30,12 @@ def rolling_inference(features: pd.DataFrame, n_components: int = 3, covariance_
             continue
         
         # Decide whether to refit
+        # NOTE: Refitting on the window ending at t includes data at t.
+        # This implies that the model parameters (and scaler stats) are influenced by X_t.
+        # While the state inference P(S_t | X_{t-w+1:t}) is a valid filtered probability,
+        # the parameter estimation has a 1-step look-ahead.
+        # For strict walk-forward, one should fit on t-w:t-1 and predict on t.
+        # However, fitting on the current window is common for stability in rolling regimes.
         should_refit = (last_fitted_hmm is None) or ((t - (window - 1)) % refit_interval == 0)
         
         try:
